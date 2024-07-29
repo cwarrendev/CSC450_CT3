@@ -1,0 +1,39 @@
+INCLUDE iostream library
+INCLUDE stdexcept library
+
+FUNCTION main
+    DECLARE ptrA, ptrB, ptrC as POINTER TO INTEGER and INITIALIZE to nullptr
+
+    TRY
+        ALLOCATE memory for ptrA
+        ALLOCATE memory for ptrB
+        ALLOCATE memory for ptrC
+
+        PRINT "Enter the first integer: "
+        READ input into memory location pointed to by ptrA
+        IF input is invalid THEN
+            THROW runtime error "Invalid input for first integer"
+
+        PRINT "Enter the second integer: "
+        READ input into memory location pointed to by ptrB
+        IF input is invalid THEN
+            THROW runtime error "Invalid input for second integer"
+
+        PRINT "Enter the third integer: "
+        READ input into memory location pointed to by ptrC
+        IF input is invalid THEN
+            THROW runtime error "Invalid input for third integer"
+
+        PRINT "The first integer is: " + VALUE pointed to by ptrA
+        PRINT "The second integer is: " + VALUE pointed to by ptrB
+        PRINT "The third integer is: " + VALUE pointed to by ptrC
+
+    CATCH runtime error AS e
+        PRINT "Error: " + e.what()
+
+    DELETE ptrA
+    DELETE ptrB
+    DELETE ptrC
+
+    RETURN 0
+END FUNCTION
