@@ -1,34 +1,40 @@
-INCLUDE iostream library
-INCLUDE stdexcept library
+INCLUDE iostream
+INCLUDE stdexcept
 
 FUNCTION main
-    DECLARE ptrA, ptrB, ptrC as POINTER TO INTEGER and INITIALIZE to nullptr
+    DECLARE ptrA AS POINTER TO INTEGER
+    DECLARE ptrB AS POINTER TO INTEGER
+    DECLARE ptrC AS POINTER TO INTEGER
+
+    SET ptrA TO nullptr
+    SET ptrB TO nullptr
+    SET ptrC TO nullptr
 
     TRY
-        ALLOCATE memory for ptrA
-        ALLOCATE memory for ptrB
-        ALLOCATE memory for ptrC
+        SET ptrA TO NEW INTEGER
+        SET ptrB TO NEW INTEGER
+        SET ptrC TO NEW INTEGER
 
         PRINT "Enter the first integer: "
-        READ input into memory location pointed to by ptrA
-        IF input is invalid THEN
-            THROW runtime error "Invalid input for first integer"
+        READ INPUT INTO ptrA
+        IF INPUT IS INVALID THEN
+            THROW runtime_error("Invalid input for first integer")
 
         PRINT "Enter the second integer: "
-        READ input into memory location pointed to by ptrB
-        IF input is invalid THEN
-            THROW runtime error "Invalid input for second integer"
+        READ INPUT INTO ptrB
+        IF INPUT IS INVALID THEN
+            THROW runtime_error("Invalid input for second integer")
 
         PRINT "Enter the third integer: "
-        READ input into memory location pointed to by ptrC
-        IF input is invalid THEN
-            THROW runtime error "Invalid input for third integer"
+        READ INPUT INTO ptrC
+        IF INPUT IS INVALID THEN
+            THROW runtime_error("Invalid input for third integer")
 
-        PRINT "The first integer is: " + VALUE pointed to by ptrA
-        PRINT "The second integer is: " + VALUE pointed to by ptrB
-        PRINT "The third integer is: " + VALUE pointed to by ptrC
+        PRINT "The first integer is: " + VALUE AT ptrA
+        PRINT "The second integer is: " + VALUE AT ptrB
+        PRINT "The third integer is: " + VALUE AT ptrC
 
-    CATCH runtime error AS e
+    CATCH EXCEPTION e
         PRINT "Error: " + e.what()
 
     DELETE ptrA
